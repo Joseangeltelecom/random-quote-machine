@@ -1,10 +1,10 @@
-import "./App.scss"
-import axios from "axios"
-import { useState, useEffect } from "react"
-import { useSpring, animated, config } from "react-spring"
+import "./App.scss";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { useSpring, animated, config } from "react-spring";
 
 function App() {
-  useSpring()
+  useSpring();
 
   const colors = [
     "#16a085",
@@ -19,41 +19,41 @@ function App() {
     "#BDBB99",
     "#77B1A9",
     "#73A857",
-  ]
+  ];
 
-  const [fetchedData, setFetchData] = useState([])
-  const [author, setAuthor] = useState("Steve Jobs")
+  const [fetchedData, setFetchData] = useState([]);
+  const [author, setAuthor] = useState("Steve Jobs");
   const [quote, setQuote] = useState(
     "The only way to do great work is to love what you do."
-  )
-  const [show, setShow] = useState(false)
-  const [dataColor, setDataColor] = useState("brown")
+  );
+  const [show, setShow] = useState(false);
+  const [dataColor, setDataColor] = useState("brown");
 
   useEffect(() => {
     const getData = async () => {
       const data = await axios.get(
         "https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json"
-      )
-      setFetchData(data)
-    }
+      );
+      setFetchData(data);
+    };
 
-    getData()
-  }, [])
+    getData();
+  }, []);
 
   function getRandomQuote() {
     return fetchedData.data.quotes[
       Math.floor(Math.random() * fetchedData.data.quotes.length)
-    ]
+    ];
   }
 
   function getQuote() {
-    let RandomColor = Math.floor(Math.random() * colors.length)
-    console.log(RandomColor)
-    let randomQuote = getRandomQuote()
-    setQuote(randomQuote.quote)
-    setAuthor(randomQuote.author)
-    setShow(!show)
-    setDataColor(colors[RandomColor])
+    let RandomColor = Math.floor(Math.random() * colors.length);
+    console.log(RandomColor);
+    let randomQuote = getRandomQuote();
+    setQuote(randomQuote.quote);
+    setAuthor(randomQuote.author);
+    setShow(!show);
+    setDataColor(colors[RandomColor]);
   }
 
   const backgroundProp = useSpring({
@@ -61,7 +61,7 @@ function App() {
     to: { backgroundColor: dataColor },
     delay: 400,
     config: config.stiff,
-  })
+  });
 
   const fade = useSpring({
     to: { opacity: 1, color: dataColor },
@@ -70,7 +70,7 @@ function App() {
     reverse: show,
 
     onRest: () => setShow(false),
-  })
+  });
   return (
     <animated.div style={backgroundProp} className="App">
       <div id="wrapper">
@@ -87,7 +87,7 @@ function App() {
           <div class="buttons">
             <animated.a
               style={backgroundProp}
-              href="https://codepen.io/freeCodeCamp/pen/qRZeGZ"
+              href={`https://twitter.com/intent/tweet?text=${quote}`}
               class="button"
               id="tweet-quote"
               title="Tweet this quote!"
@@ -95,20 +95,9 @@ function App() {
             >
               <i class="fa fa-twitter"></i>
             </animated.a>
-            <animated.a
-              style={backgroundProp}
-              href="https://codepen.io/freeCodeCamp/pen/qRZeGZ"
-              class="button"
-              id="tumblr-quote"
-              title="Post this quote on tumblr!"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <i class="fa fa-tumblr"></i>
-            </animated.a>
             <animated.button
               style={backgroundProp}
-              class="button"
+              className="button"
               id="new-quote"
               onClick={getQuote}
             >
@@ -117,11 +106,14 @@ function App() {
           </div>
         </div>
         <div class="footer">
-          by <a href="https://codepen.io/hezag/">Jose Angel</a>
+          by
+          <a href="https://github.com/Joseangeltelecom?tab=repositories">
+            Jose Angel
+          </a>
         </div>
       </div>
     </animated.div>
-  )
+  );
 }
 
-export default App
+export default App;
