@@ -2,6 +2,7 @@ import "./App.scss";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useSpring, animated, config } from "react-spring";
+import { GithubOutlined } from "@ant-design/icons";
 
 function App() {
   useSpring();
@@ -106,9 +107,11 @@ function App() {
           </div>
         </div>
         <div class="footer">
-          by
-          <a href="https://github.com/Joseangeltelecom?tab=repositories">
-            Jose Angel
+          <a
+            href="https://github.com/Joseangeltelecom/random-quote-machine"
+            target="_blank"
+          >
+            <GithubOutlined style={{ fontSize: "20px" }} /> Joseangeltelecom
           </a>
         </div>
       </div>
